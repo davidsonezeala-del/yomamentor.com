@@ -37,48 +37,27 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // CONTACT FORM SUBMISSION with Formspree
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
 
-      const formData = new FormData(contactForm);
-      const url = contactForm.action;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
+    const name = document.getElementById("name")?.value?.trim() || "";
+    const email = document.getElementById("email")?.value?.trim() || "";
+    const message = document.getElementById("message")?.value?.trim() || "";
 
-        if (response.ok) {
-          // Success feedback
-          submitBtn.textContent = '✓ Message sent!';
-          submitBtn.style.backgroundColor = '#C9A24D';
-          contactForm.reset();
-          
-          // Reset button after 3 seconds
-          setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.style.backgroundColor = '';
-            submitBtn.disabled = false;
-          }, 3000);
-        } else {
-          throw new Error('Form submission failed');
-        }
-      } catch (error) {
-        alert('Submission failed. Please email hello@yomamentor.co.uk');
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }
-    });
-  }
+    const subject = encodeURIComponent("New message from Yomamentor website");
+    const body = encodeURIComponent(
+      `Full name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`
+    );
+
+    // Opens user's default email app with prefilled details
+    window.location.href = `mailto:info@yomamentor.com?subject=${subject}&body=${body}`;
+  });
+});
+
 
   // SMOOTH SCROLL TO SECTIONS
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -94,4 +73,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
 
