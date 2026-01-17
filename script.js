@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (scheduleLink) {
     scheduleLink.addEventListener('click', function(e) {
       e.preventDefault();
-      const calendlyUrl = 'https://calendly.com/your-username/15min'; // Replace with actual Calendly link
+      const calendlyUrl = 'https://calendly.com/keturahoyibo/60'; // Replace with actual Calendly link
       window.open(calendlyUrl, '_blank');
     });
   }
@@ -94,3 +94,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
